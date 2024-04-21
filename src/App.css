@@ -1,3 +1,23 @@
 .full-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100dvh;
+}
+
+#current-location {
+  overflow-x: scroll;
+}
+
+.grid {
+  display: grid;
+  height: 100dvh;
+  align-items: center;
+  grid-template-columns: 100vw 100vw 100vw;
+}
+
+.grid-child {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
 }
