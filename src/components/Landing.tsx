@@ -3,7 +3,9 @@ import React, { useEffect } from "react";
 const Landing = () => {
   return (
     <div id="intro" className="full-page">
-      LANDING VIEW
+      <div>
+        <h1>Welcome to Weather On Scroll. A minimal weather app.</h1>
+      </div>
     </div>
   );
 };

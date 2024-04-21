@@ -1,3 +1,11 @@
+.full-page > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  width: 90%;
+}
+
 .full-page {
   display: flex;
   justify-content: center;
@@ -5,8 +13,9 @@
   height: 100dvh;
 }
 
-#current-location {
-  overflow-x: scroll;
+#current-location,
+.grid-child {
+  overflow-x: hidden;
 }
 
 .grid {
@@ -19,5 +28,7 @@
 .grid-child {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100vw;
+  height: 100dvh;
 }

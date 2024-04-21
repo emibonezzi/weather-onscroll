@@ -1,74 +1,97 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import CurrentLocation from "./components/CurrentLocation";
+import Footer from "./components/Footer.js";
 import Landing from "./components/Landing";
 import { debounce } from "./utils/debounce.js";
-import Footer from "./components/Footer.js";
-import useGeo from "./hooks/useGeo.js";
 
 function App() {
-  const indexScroll = useRef(0);
+  const [indexScroll, setIndexScroll] = useState(0);
+  const [indexHoriz, setIndexHoriz] = useState(0);
 
   useEffect(() => {
-    // define parameters of intersections
-    let options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    };
-    // function that will be called when "current location" is detected in viewport
-    let callback = (entries: IntersectionObserverEntry[]) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          // remove event listener - lock scrolling
-          window.removeEventListener("mousewheel", handleScrolling);
-        } else {
-          // add event listener - enable scrolling if current-location is not in viewport
-          window.addEventListener("mousewheel", handleScrolling, {
-            passive: false,
-          });
-        }
-      }
-    };
-    // define observer and target to observe, "current-location"
-    let observer = new IntersectionObserver(callback, options);
-    let target = document.querySelector("#current-location");
-    observer.observe(target!!);
-    // get main element
-    const main = document.querySelector("main");
-    // handle scroll
+    console.log("Current vertical index: ", indexScroll);
+
+    // handle vertical scroll
     const handleScrolling = debounce((e: any) => {
+      // get main element
+      const main = document.querySelector("main");
       e.preventDefault();
+      // if scrolling up
       if (e.wheelDelta <= 0) {
-        if (indexScroll.current < main?.children.length!! - 1) {
-          indexScroll.current = indexScroll.current + 1;
-          console.log(indexScroll.current);
-          main?.children[indexScroll.current].scrollIntoView({
+        // if we are not at the last div, scroll to next one
+        if (indexScroll < main?.children.length!! - 1) {
+          console.log("Scrolling up");
+          setIndexScroll(indexScroll + 1);
+          main?.children[indexScroll + 1].scrollIntoView({
             behavior: "smooth",
           });
         } else {
-          indexScroll.current = 0;
+          // if last div, go back to the first one
+          setIndexScroll(0);
           main?.children[0].scrollIntoView({
             behavior: "smooth",
           });
         }
       } else {
-        if (indexScroll.current > 0) {
-          indexScroll.current = indexScroll.current - 1;
-          console.log(indexScroll.current);
-          main?.children[indexScroll.current].scrollIntoView({
+        // if scrolling down
+        // if we are not in the first div, scroll back
+        if (indexScroll > 0) {
+          setIndexScroll(indexScroll - 1);
+          main?.children[indexScroll - 1].scrollIntoView({
             behavior: "smooth",
           });
         } else {
-          indexScroll.current = 0;
+          // if we are at the first div, do nothing
+          console.log("You are at the first div, can't scroll back.");
         }
       }
     }, 50);
 
-    return () => {
+    // handle horiz scroll
+    const handleScrollingHoriz = debounce((e: any) => {
+      // get main element
+      const main = document.querySelector("#current-location");
+      e.preventDefault();
+      // if scrolling up
+      if (e.wheelDelta <= 0) {
+        // if we are not at the last div, scroll to next one
+        if (indexHoriz < main?.children.length!! - 1) {
+          console.log("Scrolling up");
+          setIndexHoriz(indexHoriz + 1);
+          main?.children[indexHoriz + 1].scrollIntoView({
+            behavior: "smooth",
+          });
+        } else {
+          // if last div, go back to the first one
+          setIndexHoriz(0);
+          main?.children[0].scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      } else {
+        // if scrolling down
+        // if we are not in the first div, scroll back
+        if (indexHoriz > 0) {
+          setIndexHoriz(indexHoriz - 1);
+          main?.children[indexHoriz - 1].scrollIntoView({
+            behavior: "smooth",
+          });
+        } else {
+          // if we are at the first div, do nothing
+          console.log("You are at the first div, can't scroll back.");
+        }
+      }
+    }, 50);
+
+    // if user is in div n°1 (current location) activate horizontal scrolling
+    if (indexScroll === 1) {
       window.removeEventListener("mousewheel", handleScrolling);
-    };
-  }, [indexScroll]);
+      window.addEventListener("mousewheel", handleScrollingHoriz);
+    } else {
+      window.addEventListener("mousewheel", handleScrolling);
+    }
+  }, [indexScroll, indexHoriz]);
 
   return (
     <main>

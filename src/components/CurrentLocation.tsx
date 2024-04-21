@@ -1,10 +1,7 @@
-import { useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import useGeo from "../hooks/useGeo";
 
 const CurrentLocation = () => {
-  const queryClient = useQueryClient();
-  const { weatherData, geoLoading, weatherLoading } = useGeo();
+  const { geoData, weatherData, geoLoading, weatherLoading } = useGeo();
 
   if (geoLoading || weatherLoading)
     return (
@@ -16,10 +13,16 @@ const CurrentLocation = () => {
   return (
     <div id="current-location" className="grid">
       <div className="grid-child">
-        It looks like you're in {weatherData.city.name}. The current weather is{" "}
-        {weatherData.list[0].weather[0].description}.
+        <h1>
+          It looks like you're in {geoData.city}, {geoData.state_prov}.
+          <br /> The current weather is{" "}
+          {weatherData.list[0].weather[0].description} with a temperature of{" "}
+          {weatherData.list[0].main.temp.toFixed(0)}°F.
+        </h1>
       </div>
-      <div className="grid-child">FORECAST 5 DAYS</div>
+      <div className="grid-child">
+        <h1>FORECAST</h1>
+      </div>
       <div className="grid-child">SEARCH LOCATION</div>
     </div>
   );

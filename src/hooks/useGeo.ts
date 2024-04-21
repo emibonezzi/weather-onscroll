@@ -38,7 +38,7 @@ const useGeo = () => {
     staleTime: ms("24h"),
   });
 
-  return { weatherData, geoLoading, weatherLoading };
+  return { geoData, weatherData, geoLoading, weatherLoading };
 };
 
 export default useGeo;
