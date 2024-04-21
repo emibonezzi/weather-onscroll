@@ -4,6 +4,7 @@ import CurrentLocation from "./components/CurrentLocation";
 import Landing from "./components/Landing";
 import { debounce } from "./utils/debounce.js";
 import Footer from "./components/Footer.js";
+import useGeo from "./hooks/useGeo.js";
 
 function App() {
   const indexScroll = useRef(0);
@@ -19,10 +20,10 @@ function App() {
     let callback = (entries: IntersectionObserverEntry[]) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          // remove event listener
+          // remove event listener - lock scrolling
           window.removeEventListener("mousewheel", handleScrolling);
         } else {
-          // add event listener
+          // add event listener - enable scrolling if current-location is not in viewport
           window.addEventListener("mousewheel", handleScrolling, {
             passive: false,
           });
