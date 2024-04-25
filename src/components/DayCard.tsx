@@ -1,3 +1,5 @@
+import { icons } from "../utils/icons";
+
 interface Props {
   dayName: number;
   weatherIcon: string;
@@ -8,19 +10,16 @@ interface Props {
 const DayCard = (props: Props) => {
   return (
     <div className="card">
-      <h1>
+      <p className="day-name">
         {new Date(props.dayName * 1000).toLocaleDateString("en-US", {
           weekday: "long",
         })}
-      </h1>
-      <img
-        src={`https://openweathermap.org/img/wn/${props.weatherIcon.replace(
-          "n",
-          "d"
-        )}@2x.png`}
-      />
-      <p>{props.weatherMain}</p>
-      <h1>{props.weatherTemp.toFixed(0)}°</h1>
+      </p>
+      <span className="icon">
+        {icons.find((icon) => icon?.name === props.weatherMain)?.icon}
+      </span>
+      <h1>{props.weatherMain}</h1>
+      <span className="temp">{props.weatherTemp.toFixed(0)}°</span>
     </div>
   );
 };

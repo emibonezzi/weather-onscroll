@@ -39,9 +39,9 @@ const useGeo = () => {
     staleTime: ms("24h"),
   });
 
-  const uniqueDays = groupByDays(weatherData?.list);
+  const ipLocationForecast = groupByDays(weatherData?.list);
 
-  return { geoData, uniqueDays, geoLoading, weatherLoading };
+  return { geoData, ipLocationForecast, geoLoading, weatherLoading };
 };
 
 export default useGeo;

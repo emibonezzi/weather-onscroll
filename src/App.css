@@ -27,6 +27,7 @@
 
 .grid-child {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -34,15 +35,55 @@
 }
 
 #forecast.grid-child {
+  margin-top: -50px;
+}
+
+.cards {
   display: grid;
-  grid-template-columns: repeat(5, 220px);
+  grid-template-columns: repeat(5, 250px);
   gap: 30px;
   align-items: none;
 }
 
 .card {
   display: grid;
-  border: 1px solid white;
-  border-radius: 5%;
+  border-left: 1px solid white;
+  grid-template-rows: repeat(4, 100px);
+  border-radius: 20px;
   justify-items: center;
+  align-items: center;
+  transition: all 200ms ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.icon {
+  font-size: 100px;
+}
+
+.day-name {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.temp {
+  font-size: 2em;
+}
+
+#search.grid-child {
+  flex-direction: row;
+}
+
+input {
+  font-size: 2.5em;
+  background-color: black;
+  border: none;
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+  height: 70px;
+  width: 400px;
+  padding: 10px;
 }
