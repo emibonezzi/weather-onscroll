@@ -32,3 +32,17 @@
   width: 100vw;
   height: 100dvh;
 }
+
+#forecast.grid-child {
+  display: grid;
+  grid-template-columns: repeat(5, 220px);
+  gap: 30px;
+  align-items: none;
+}
+
+.card {
+  display: grid;
+  border: 1px solid white;
+  border-radius: 5%;
+  justify-items: center;
+}

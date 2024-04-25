@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import APIClientGeo from "../services/geo-service/api-client";
 import ms from "ms";
 import APIClientWeather from "../services/weather-service/api-client";
+import { groupByDays } from "../utils/groupByDays";
 
 const apiClientGeo = new APIClientGeo("/ipgeo");
 const apiClientWeather = new APIClientWeather("/data/2.5/forecast");
@@ -38,7 +39,9 @@ const useGeo = () => {
     staleTime: ms("24h"),
   });
 
-  return { geoData, weatherData, geoLoading, weatherLoading };
+  const uniqueDays = groupByDays(weatherData?.list);
+
+  return { geoData, uniqueDays, geoLoading, weatherLoading };
 };
 
 export default useGeo;
