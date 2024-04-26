@@ -4,7 +4,6 @@ import Footer from "./components/Footer.js";
 import Landing from "./components/Landing";
 import { debounce } from "./utils/debounce";
 import Main from "./components/Main.js";
-import useQueryStore from "./state-management/search-query/store.js";
 
 function App() {
   // manage vertical and horizontal scroll state

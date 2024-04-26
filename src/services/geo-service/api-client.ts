@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.ipgeolocation.io",
@@ -15,7 +15,7 @@ class APIClientGeo<T> {
   }
 
   getAll() {
-    return axiosInstance.get(this.endpoint).then((res) => res.data);
+    return axiosInstance.get<T>(this.endpoint).then((res) => res.data);
   }
 }
 

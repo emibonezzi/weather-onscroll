@@ -16,7 +16,7 @@ class APIClientWeather<T> {
   }
 
   getAll(config: AxiosRequestConfig) {
-    return axiosInstance.get(this.endpoint, config).then((res) => res.data);
+    return axiosInstance.get<T>(this.endpoint, config).then((res) => res.data);
   }
 }
 

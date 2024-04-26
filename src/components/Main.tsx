@@ -20,7 +20,7 @@ const Main = ({ onSearch }: Props) => {
     weatherError,
   } = useGeo();
   const { query, setQuery } = useQueryStore();
-  const { cities, isLoading, error } = useSearch();
+  const { cities, error } = useSearch();
   const { selectedCity, setSelectedCity } = useSelectedCityStore();
   const { selectedCityWeather, isLoadingNewWeather, isErrorNewWeather } =
     useNewCityWeather();
@@ -91,7 +91,7 @@ const Main = ({ onSearch }: Props) => {
           {cities
             ? cities.map((city: SearchResult) => (
                 <button
-                  onClick={(e) => {
+                  onClick={() => {
                     setSelectedCity({
                       name: city.name,
                       country: city.country,
