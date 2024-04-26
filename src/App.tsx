@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import CurrentLocation from "./components/CurrentLocation";
 import Footer from "./components/Footer.js";
 import Landing from "./components/Landing";
 import { debounce } from "./utils/debounce.js";
+import Main from "./components/Main.js";
 
 function App() {
   const [indexScroll, setIndexScroll] = useState(0);
   const [indexHoriz, setIndexHoriz] = useState(0);
+
+  function handleScrollBack() {
+    const main = document.querySelector("#current-location");
+    main?.children[0].scrollIntoView({ behavior: "smooth" });
+    setIndexHoriz(0);
+  }
 
   useEffect(() => {
     console.log("Current vertical index: ", indexScroll);
@@ -96,7 +102,7 @@ function App() {
   return (
     <main>
       <Landing />
-      <CurrentLocation />
+      <Main onSearch={handleScrollBack} />
       <Footer />
     </main>
   );

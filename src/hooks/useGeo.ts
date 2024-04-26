@@ -5,6 +5,7 @@ import APIClientWeather from "../services/weather-service/api-client";
 import { groupByDays } from "../utils/groupByDays";
 import { IpData } from "../entities/IpData";
 import { WeatherResponse } from "../entities/WeatherResponse";
+import useSelectedCityStore from "../state-management/selected-city/store";
 
 const apiClientGeo = new APIClientGeo<IpData>("/ipgeo");
 const apiClientWeather = new APIClientWeather<WeatherResponse>(
@@ -12,6 +13,8 @@ const apiClientWeather = new APIClientWeather<WeatherResponse>(
 );
 
 const useGeo = () => {
+  const { setSelectedCity } = useSelectedCityStore();
+
   const {
     data: geoData,
     isLoading: geoLoading,
