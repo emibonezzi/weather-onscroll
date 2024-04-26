@@ -3,11 +3,15 @@ import { create } from "zustand";
 
 interface QueryStore {
   query: string;
+  searchBarFocused: boolean;
+  setSearchBarFocus: (status: boolean) => void;
   setQuery: (city: string) => void;
 }
 
 const useQueryStore = create<QueryStore>((set) => ({
   query: "",
+  searchBarFocused: false,
+  setSearchBarFocus: (status) => set(() => ({ searchBarFocused: status })),
   setQuery: (city) => set(() => ({ query: city })),
 }));
 

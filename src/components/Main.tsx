@@ -12,7 +12,7 @@ interface Props {
 
 const Main = ({ onSearch }: Props) => {
   const { geoData, ipLocationForecast, geoLoading, weatherLoading } = useGeo();
-  const { query, setQuery } = useQueryStore();
+  const { query, setQuery, setSearchBarFocus } = useQueryStore();
   const { cities, isLoading, error } = useSearch();
   const { selectedCity, setSelectedCity } = useSelectedCityStore();
   const { selectedCityWeather, isLoadingNewWeather } = useNewCityWeather();
@@ -62,6 +62,10 @@ const Main = ({ onSearch }: Props) => {
         <div className="search-container">
           <h1>Want to look elsewhere?</h1>
           <input
+            onFocus={(e) => {
+              setSearchBarFocus(true);
+            }}
+            id="search-bar"
             onChange={(e) => {
               setQuery(e.target.value);
             }}
