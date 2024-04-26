@@ -11,11 +11,19 @@ interface Props {
 }
 
 const Main = ({ onSearch }: Props) => {
-  const { geoData, ipLocationForecast, geoLoading, weatherLoading } = useGeo();
-  const { query, setQuery, setSearchBarFocus } = useQueryStore();
+  const {
+    geoData,
+    ipLocationForecast,
+    geoLoading,
+    weatherLoading,
+    geoError,
+    weatherError,
+  } = useGeo();
+  const { query, setQuery } = useQueryStore();
   const { cities, isLoading, error } = useSearch();
   const { selectedCity, setSelectedCity } = useSelectedCityStore();
-  const { selectedCityWeather, isLoadingNewWeather } = useNewCityWeather();
+  const { selectedCityWeather, isLoadingNewWeather, isErrorNewWeather } =
+    useNewCityWeather();
 
   if (geoLoading || weatherLoading || isLoadingNewWeather)
     return (
@@ -33,6 +41,16 @@ const Main = ({ onSearch }: Props) => {
   return (
     <div id="current-location" className="grid">
       <div className="grid-child">
+        {geoError && <h1>There's been an error in fetching your IP data.</h1>}
+        {weatherError && (
+          <h1>There's been an error in fetching your location weather data.</h1>
+        )}
+        {isErrorNewWeather && (
+          <h1>
+            There's been an error in fetching your searched location weather
+            data.
+          </h1>
+        )}
         <h1>
           {intro}
           {cityName}
@@ -62,9 +80,6 @@ const Main = ({ onSearch }: Props) => {
         <div className="search-container">
           <h1>Want to look elsewhere?</h1>
           <input
-            onFocus={(e) => {
-              setSearchBarFocus(true);
-            }}
             id="search-bar"
             onChange={(e) => {
               setQuery(e.target.value);
@@ -72,6 +87,7 @@ const Main = ({ onSearch }: Props) => {
           />
         </div>
         <div className="results">
+          {error && <h1>There was an error retrieving your search results.</h1>}
           {cities
             ? cities.map((city: SearchResult) => (
                 <button

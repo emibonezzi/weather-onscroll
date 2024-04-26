@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer.js";
 import Landing from "./components/Landing";
@@ -10,7 +10,6 @@ function App() {
   // manage vertical and horizontal scroll state
   const [indexScroll, setIndexScroll] = useState(0);
   const [indexHoriz, setIndexHoriz] = useState(0);
-  const { searchBarFocused } = useQueryStore();
 
   // handle vertical scroll for mousewheel
   const handleScrolling = debounce((e: any) => {

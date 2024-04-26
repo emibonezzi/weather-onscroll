@@ -13,8 +13,6 @@ const apiClientWeather = new APIClientWeather<WeatherResponse>(
 );
 
 const useGeo = () => {
-  const { setSelectedCity } = useSelectedCityStore();
-
   const {
     data: geoData,
     isLoading: geoLoading,
@@ -48,7 +46,14 @@ const useGeo = () => {
 
   const ipLocationForecast = groupByDays(weatherData?.list);
 
-  return { geoData, ipLocationForecast, geoLoading, weatherLoading };
+  return {
+    geoData,
+    ipLocationForecast,
+    geoLoading,
+    weatherLoading,
+    geoError,
+    weatherError,
+  };
 };
 
 export default useGeo;
