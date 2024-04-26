@@ -195,11 +195,9 @@ a {
   }
 }
 
-#current-location {
-  position: relative;
-}
-
-#forecast {
+#current-location,
+#forecast,
+#search {
   position: relative;
 }
 

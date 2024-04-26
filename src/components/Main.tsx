@@ -1,4 +1,7 @@
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import {
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from "react-icons/md";
 import { SearchResult } from "../entities/SearchResult";
 import useGeo from "../hooks/useGeo";
 import useNewCityWeather from "../hooks/useNewCityWeather";
@@ -6,6 +9,7 @@ import useSearch from "../hooks/useSearch";
 import useQueryStore from "../state-management/search-query/store";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import DayCard from "./DayCard";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 interface Props {
   onSearch: () => void;
@@ -61,7 +65,14 @@ const Main = ({ onSearch }: Props) => {
           }{" "}
           with a temperature of {forecast!![0].main.temp.toFixed(0)}°F.
         </h1>
-        <a href="#forecast">
+        <a
+          onClick={() => {
+            const element = document.querySelector("#forecast");
+            scrollIntoView(element!!, {
+              behavior: "smooth",
+            });
+          }}
+        >
           <MdKeyboardDoubleArrowRight className="scroller" />
         </a>
       </div>
@@ -79,7 +90,14 @@ const Main = ({ onSearch }: Props) => {
             />
           ))}
         </div>
-        <a href="#search">
+        <a
+          onClick={() => {
+            const element = document.querySelector("#search");
+            scrollIntoView(element!!, {
+              behavior: "smooth",
+            });
+          }}
+        >
           <MdKeyboardDoubleArrowRight className="scroller" />
         </a>
       </div>
@@ -114,6 +132,16 @@ const Main = ({ onSearch }: Props) => {
               ))
             : ""}
         </div>
+        <a
+          onClick={() => {
+            const element = document.querySelector("#forecast");
+            scrollIntoView(element!!, {
+              behavior: "smooth",
+            });
+          }}
+        >
+          <MdKeyboardDoubleArrowLeft className="scroller" />
+        </a>
       </div>
     </div>
   );
