@@ -20,7 +20,7 @@ const Main = ({ onSearch }: Props) => {
     weatherError,
   } = useGeo();
   const { query, setQuery } = useQueryStore();
-  const { cities, error } = useSearch();
+  const { cities } = useSearch();
   const { selectedCity, setSelectedCity } = useSelectedCityStore();
   const { selectedCityWeather, isLoadingNewWeather, isErrorNewWeather } =
     useNewCityWeather();
