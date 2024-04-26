@@ -1,14 +1,11 @@
-import useSearch from "../hooks/useSearch";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { SearchResult } from "../entities/SearchResult";
 import useGeo from "../hooks/useGeo";
 import useNewCityWeather from "../hooks/useNewCityWeather";
+import useSearch from "../hooks/useSearch";
 import useQueryStore from "../state-management/search-query/store";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import DayCard from "./DayCard";
-import { SearchResult } from "../entities/SearchResult";
-import {
-  MdKeyboardDoubleArrowDown,
-  MdKeyboardDoubleArrowRight,
-} from "react-icons/md";
 
 interface Props {
   onSearch: () => void;

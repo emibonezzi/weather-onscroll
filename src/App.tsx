@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer.js";
 import Landing from "./components/Landing";
-import { debounce } from "./utils/debounce";
 import Main from "./components/Main.js";
 
 function App() {
