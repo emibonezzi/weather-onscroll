@@ -18,7 +18,7 @@ const DayCard = (props: Props) => {
       <span className="icon">
         {icons.find((icon) => icon?.name === props.weatherMain)?.icon}
       </span>
-      <h1>{props.weatherMain}</h1>
+      <h1 className="description">{props.weatherMain}</h1>
       <span className="temp">{props.weatherTemp.toFixed(0)}°</span>
     </div>
   );
