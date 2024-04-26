@@ -35,7 +35,7 @@
 }
 
 #forecast.grid-child {
-  margin-top: -50px;
+  margin-top: -120px;
 }
 
 .cards {
@@ -179,6 +179,7 @@ a {
   border-radius: 50%;
   padding: 10px;
   transition: all 400ms;
+  cursor: pointer;
 }
 
 .scroller:hover {
@@ -202,5 +203,5 @@ a {
 }
 
 #forecast > a {
-  bottom: 1px;
+  bottom: 0px;
 }
