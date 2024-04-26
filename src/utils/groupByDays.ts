@@ -1,4 +1,6 @@
-export function groupByDays(data: any) {
+import { Day } from "../entities/Day";
+
+export function groupByDays(data: Day[] | undefined) {
   if (!data) {
     return;
   }

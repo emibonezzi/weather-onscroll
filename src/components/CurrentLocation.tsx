@@ -1,14 +1,14 @@
-import useFindCity from "../hooks/useFindCity";
+import useSearch from "../hooks/useSearch";
 import useGeo from "../hooks/useGeo";
 import useNewCityWeather from "../hooks/useNewCityWeather";
-import useNewCityStore from "../state-management/new-city/store";
+import useQueryStore from "../state-management/search-query/store";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import DayCard from "./DayCard";
 
 const CurrentLocation = () => {
   const { geoData, ipLocationForecast, geoLoading, weatherLoading } = useGeo();
-  const { newCity, setNewCity } = useNewCityStore();
-  const { cities, isLoading, error } = useFindCity();
+  const { query, setQuery } = useQueryStore();
+  const { cities, isLoading, error } = useSearch();
   const { setSelectedCity } = useSelectedCityStore();
   const { city, selectedCityWeather, isLoadingNewWeather } =
     useNewCityWeather();
@@ -21,7 +21,7 @@ const CurrentLocation = () => {
     );
 
   // if new city is searched
-  if (newCity) {
+  if (query) {
     // if new city is being loaded
     if (isLoadingNewWeather) {
       return <p>Loading new forecast</p>;
@@ -31,7 +31,7 @@ const CurrentLocation = () => {
       <div id="current-location" className="grid">
         <div className="grid-child">
           <h1>
-            You searched for {city.name}.
+            You searched for {city?.name}.
             <br /> The current weather is{" "}
             {selectedCityWeather!![0].weather[0].description} with a temperature
             of {selectedCityWeather!![0].main.temp.toFixed(0)}°F.
@@ -39,7 +39,8 @@ const CurrentLocation = () => {
         </div>
         <div id="forecast" className="grid-child">
           <h1>
-            This is how it's going to look in the next five days in {city.name}.
+            This is how it's going to look in the next five days in {city?.name}
+            .
           </h1>
           <div className="cards">
             {selectedCityWeather?.slice(1).map((day) => (
@@ -56,7 +57,7 @@ const CurrentLocation = () => {
           <h1>Want to look elsewhere?</h1>
           <input
             onChange={(e) => {
-              setNewCity(e.target.value);
+              setQuery(e.target.value);
             }}
           />
           {cities
@@ -78,11 +79,12 @@ const CurrentLocation = () => {
     );
   }
 
+  // return forecast base don IP location
   return (
     <div id="current-location" className="grid">
       <div className="grid-child">
         <h1>
-          It looks like you're in {geoData.city}, {geoData.state_prov}.
+          It looks like you're in {geoData?.city}, {geoData?.state_prov}.
           <br /> The current weather is{" "}
           {ipLocationForecast!![0].weather[0].description} with a temperature of{" "}
           {ipLocationForecast!![0].main.temp.toFixed(0)}°F.
@@ -90,8 +92,8 @@ const CurrentLocation = () => {
       </div>
       <div id="forecast" className="grid-child">
         <h1>
-          This is how it's going to look in the next five days in {geoData.city}
-          .
+          This is how it's going to look in the next five days in{" "}
+          {geoData?.city}.
         </h1>
         <div className="cards">
           {ipLocationForecast?.slice(1).map((day) => (
@@ -108,11 +110,11 @@ const CurrentLocation = () => {
         <h1>Want to look elsewhere?</h1>
         <input
           onChange={(e) => {
-            setNewCity(e.target.value);
+            setQuery(e.target.value);
           }}
         />
         {cities
-          ? cities.map((city) => (
+          ? cities.map((city: any) => (
               <button
                 onClick={() => {
                   setSelectedCity({

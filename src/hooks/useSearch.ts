@@ -1,21 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
-import useNewCityStore from "../state-management/new-city/store";
 import APIClientWeather from "../services/weather-service/api-client";
-const apiClient = new APIClientWeather("/geo/1.0/direct");
+import { SearchResult } from "../entities/SearchResult";
+import useQueryStore from "../state-management/search-query/store";
+const apiClient = new APIClientWeather<SearchResult[]>("/geo/1.0/direct");
 
 const useFindCity = () => {
-  const { newCity } = useNewCityStore();
+  const { query } = useQueryStore();
   const {
     data: cities,
     isLoading,
     error,
     refetch,
-  } = useQuery({
-    queryKey: ["newCity", newCity],
+  } = useQuery<SearchResult[]>({
+    queryKey: ["query", query],
     queryFn: () =>
       apiClient.getAll({
-        params: { q: newCity, limit: 5 },
+        params: { q: query, limit: 5 },
       }),
     staleTime: ms("24h"),
     refetchOnMount: false,

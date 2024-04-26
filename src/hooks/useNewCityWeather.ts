@@ -3,8 +3,9 @@ import ms from "ms";
 import APIClientWeather from "../services/weather-service/api-client";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import { groupByDays } from "../utils/groupByDays";
+import { WeatherResponse } from "../entities/WeatherResponse";
 
-const apiClient = new APIClientWeather("/data/2.5/forecast");
+const apiClient = new APIClientWeather<WeatherResponse>("/data/2.5/forecast");
 
 const useNewCityWeather = () => {
   const { selectedCity } = useSelectedCityStore();
@@ -12,7 +13,7 @@ const useNewCityWeather = () => {
     data: selectedWeather,
     isLoading: isLoadingNewWeather,
     error: isErrorNewWeather,
-  } = useQuery({
+  } = useQuery<WeatherResponse>({
     queryKey: ["newCityWeather", selectedCity],
     queryFn: () =>
       apiClient.getAll({

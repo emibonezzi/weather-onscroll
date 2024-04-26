@@ -3,16 +3,20 @@ import APIClientGeo from "../services/geo-service/api-client";
 import ms from "ms";
 import APIClientWeather from "../services/weather-service/api-client";
 import { groupByDays } from "../utils/groupByDays";
+import { IpData } from "../entities/IpData";
+import { WeatherResponse } from "../entities/WeatherResponse";
 
-const apiClientGeo = new APIClientGeo("/ipgeo");
-const apiClientWeather = new APIClientWeather("/data/2.5/forecast");
+const apiClientGeo = new APIClientGeo<IpData>("/ipgeo");
+const apiClientWeather = new APIClientWeather<WeatherResponse>(
+  "/data/2.5/forecast"
+);
 
 const useGeo = () => {
   const {
     data: geoData,
     isLoading: geoLoading,
     error: geoError,
-  } = useQuery({
+  } = useQuery<IpData>({
     queryKey: ["location"],
     queryFn: () => apiClientGeo.getAll(),
     staleTime: ms("24h"),
@@ -29,7 +33,7 @@ const useGeo = () => {
     data: weatherData,
     isLoading: weatherLoading,
     error: weatherError,
-  } = useQuery({
+  } = useQuery<WeatherResponse>({
     queryKey: ["weather"],
     queryFn: () =>
       apiClientWeather.getAll({
