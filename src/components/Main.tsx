@@ -5,6 +5,10 @@ import useQueryStore from "../state-management/search-query/store";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import DayCard from "./DayCard";
 import { SearchResult } from "../entities/SearchResult";
+import {
+  MdKeyboardDoubleArrowDown,
+  MdKeyboardDoubleArrowRight,
+} from "react-icons/md";
 
 interface Props {
   onSearch: () => void;
@@ -60,6 +64,9 @@ const Main = ({ onSearch }: Props) => {
           }{" "}
           with a temperature of {forecast!![0].main.temp.toFixed(0)}°F.
         </h1>
+        <a href="#forecast">
+          <MdKeyboardDoubleArrowRight className="scroller" />
+        </a>
       </div>
       <div id="forecast" className="grid-child">
         <h1>
@@ -75,6 +82,9 @@ const Main = ({ onSearch }: Props) => {
             />
           ))}
         </div>
+        <a href="#search">
+          <MdKeyboardDoubleArrowRight className="scroller" />
+        </a>
       </div>
       <div id="search" className="grid-child">
         <div className="search-container">

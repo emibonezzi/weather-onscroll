@@ -164,3 +164,45 @@ input {
     font-size: 1.5em;
   }
 }
+
+a {
+  text-decoration: none;
+  color: white;
+  position: absolute;
+  bottom: 100px;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.scroller {
+  font-size: 2em;
+  border: 1px white solid;
+  border-radius: 50%;
+  padding: 10px;
+  transition: all 400ms;
+}
+
+.scroller:hover {
+  border-radius: 25%;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+#current-location {
+  position: relative;
+}
+
+#forecast {
+  position: relative;
+}
+
+#forecast > a {
+  bottom: 1px;
+}
