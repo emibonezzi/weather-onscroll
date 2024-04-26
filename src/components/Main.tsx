@@ -87,7 +87,6 @@ const Main = ({ onSearch }: Props) => {
           />
         </div>
         <div className="results">
-          {error && <h1>There was an error retrieving your search results.</h1>}
           {cities
             ? cities.map((city: SearchResult) => (
                 <button
