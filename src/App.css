@@ -2,6 +2,7 @@ main {
   height: 100dvh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 #intro {
@@ -10,13 +11,6 @@ main {
   justify-content: center;
   align-items: center;
   height: 100dvh;
-}
-
-#current-location {
-  height: 100dvh;
-  overflow-y: scroll;
-  scroll-snap-align: center;
-  scroll-snap-type: y mandatory;
 }
 
 #weather,
