@@ -23,7 +23,7 @@ const Main = () => {
 
   if (geoLoading || weatherLoading || isLoadingNewWeather)
     return (
-      <div id="current-location">
+      <div id="weather">
         <p>Loading weather data...</p>
       </div>
     );
