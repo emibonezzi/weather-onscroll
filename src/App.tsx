@@ -4,8 +4,8 @@ import Main from "./components/Main.js";
 
 function App() {
   function handleScrollBack() {
-    const main = document.querySelector("#current-location");
-    main?.children[0].scrollIntoView();
+    const main = document.querySelector("main");
+    main?.children[1].scrollIntoView();
   }
   return (
     <main>
