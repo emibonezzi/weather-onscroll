@@ -105,6 +105,7 @@ input {
 @media (max-width: 480px) {
   .cards {
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 5px;
   }
   .card {
     grid-template-rows: repeat(4, 40px);
