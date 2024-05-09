@@ -6,11 +6,7 @@ import useQueryStore from "../state-management/search-query/store";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import DayCard from "./DayCard";
 
-interface Props {
-  onSearch: () => void;
-}
-
-const Main = ({ onSearch }: Props) => {
+const Main = () => {
   const {
     geoData,
     ipLocationForecast,
@@ -21,7 +17,7 @@ const Main = ({ onSearch }: Props) => {
   } = useGeo();
   const { query, setQuery } = useQueryStore();
   const { cities } = useSearch();
-  const { selectedCity, setSelectedCity } = useSelectedCityStore();
+  const { selectedCity } = useSelectedCityStore();
   const { selectedCityWeather, isLoadingNewWeather, isErrorNewWeather } =
     useNewCityWeather();
 
@@ -93,20 +89,11 @@ const Main = ({ onSearch }: Props) => {
           <div className="results">
             {cities
               ? cities.map((city: SearchResult) => (
-                  <button
-                    onClick={() => {
-                      setSelectedCity({
-                        name: city.name,
-                        country: city.country,
-                        state: city.state,
-                        lat: city.lat,
-                        lon: city.lon,
-                      });
-                      onSearch();
-                    }}
-                  >
-                    {city.name}
-                    {city.state ? `, ${city.state}` : null} - {city.country}
+                  <button>
+                    <a href="#weather">
+                      {city.name}
+                      {city.state ? `, ${city.state}` : null} - {city.country}
+                    </a>
                   </button>
                 ))
               : ""}

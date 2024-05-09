@@ -5,6 +5,10 @@ main {
   scroll-behavior: smooth;
 }
 
+a {
+  all: unset;
+}
+
 #intro {
   scroll-snap-align: center;
   display: flex;
