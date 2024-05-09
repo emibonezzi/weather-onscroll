@@ -80,35 +80,37 @@ const Main = ({ onSearch }: Props) => {
         </div>
       </div>
       <div id="search">
-        <div className="search-container">
-          <h1>Want to look elsewhere?</h1>
-          <input
-            id="search-bar"
-            onChange={(e) => {
-              setQuery(e.target.value);
-            }}
-          />
-        </div>
-        <div className="results">
-          {cities
-            ? cities.map((city: SearchResult) => (
-                <button
-                  onClick={() => {
-                    setSelectedCity({
-                      name: city.name,
-                      country: city.country,
-                      state: city.state,
-                      lat: city.lat,
-                      lon: city.lon,
-                    });
-                    onSearch();
-                  }}
-                >
-                  {city.name}
-                  {city.state ? `, ${city.state}` : null} - {city.country}
-                </button>
-              ))
-            : ""}
+        <div>
+          <div className="search-container">
+            <h1>Want to look elsewhere?</h1>
+            <input
+              id="search-bar"
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+            />
+          </div>
+          <div className="results">
+            {cities
+              ? cities.map((city: SearchResult) => (
+                  <button
+                    onClick={() => {
+                      setSelectedCity({
+                        name: city.name,
+                        country: city.country,
+                        state: city.state,
+                        lat: city.lat,
+                        lon: city.lon,
+                      });
+                      onSearch();
+                    }}
+                  >
+                    {city.name}
+                    {city.state ? `, ${city.state}` : null} - {city.country}
+                  </button>
+                ))
+              : ""}
+          </div>
         </div>
       </div>
     </>
