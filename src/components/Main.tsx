@@ -17,7 +17,7 @@ const Main = () => {
   } = useGeo();
   const { query, setQuery } = useQueryStore();
   const { cities } = useSearch();
-  const { selectedCity } = useSelectedCityStore();
+  const { selectedCity, setSelectedCity } = useSelectedCityStore();
   const { selectedCityWeather, isLoadingNewWeather, isErrorNewWeather } =
     useNewCityWeather();
 
@@ -89,7 +89,17 @@ const Main = () => {
           <div className="results">
             {cities
               ? cities.map((city: SearchResult) => (
-                  <button>
+                  <button
+                    onClick={() => {
+                      setSelectedCity({
+                        name: city.name,
+                        country: city.country,
+                        state: city.state,
+                        lat: city.lat,
+                        lon: city.lon,
+                      });
+                    }}
+                  >
                     <a href="#weather">
                       {city.name}
                       {city.state ? `, ${city.state}` : null} - {city.country}
