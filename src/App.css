@@ -104,7 +104,7 @@ input {
 
 @media (max-width: 480px) {
   .cards {
-    grid-template-columns: repeat(2, max-content);
+    grid-template-columns: repeat(3, 1fr);
   }
   .card {
     grid-template-rows: repeat(4, 40px);
@@ -116,6 +116,9 @@ input {
     font-size: 1em;
   }
   .description {
+    font-size: 1.2em;
+  }
+  .temp {
     font-size: 1.2em;
   }
   input {
