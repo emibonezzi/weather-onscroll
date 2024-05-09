@@ -1,12 +1,7 @@
-* {
-  scroll-behavior: smooth;
-}
-
 body {
   box-sizing: border-box;
   background-color: black;
   color: white;
-  overflow: hidden;
   font-family: "DM Sans", sans-serif;
 }
 
@@ -14,4 +9,10 @@ h1 {
   padding: 30px;
   font-size: 2.5em;
   font-weight: 400;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8em;
+  }
 }

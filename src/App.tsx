@@ -1,5 +1,4 @@
 import "./App.css";
-import Footer from "./components/Footer.js";
 import Landing from "./components/Landing";
 import Main from "./components/Main.js";
 
@@ -12,7 +11,6 @@ function App() {
     <main>
       <Landing />
       <Main onSearch={handleScrollBack} />
-      <Footer />
     </main>
   );
 }

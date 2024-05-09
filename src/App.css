@@ -1,55 +1,51 @@
-.full-page > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90%;
-  width: 90%;
+main {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
-.full-page {
+#intro {
+  scroll-snap-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100dvh;
 }
 
-#current-location,
-.grid-child {
-  overflow-x: hidden;
-}
-
-.grid {
-  display: grid;
+#current-location {
   height: 100dvh;
-  align-items: center;
-  grid-template-columns: 100vw 100vw 100vw;
+  overflow-y: scroll;
+  scroll-snap-align: center;
+  scroll-snap-type: y mandatory;
 }
 
-.grid-child {
+#weather,
+#forecast,
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+  height: 100dvh;
+}
+
+#forecast > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100dvh;
-}
-
-#forecast.grid-child {
-  margin-top: -120px;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(5, 250px);
+  grid-template-columns: repeat(5, max-content);
   gap: 30px;
   align-items: none;
 }
 
 .card {
   display: grid;
-  border-left: 1px solid white;
   grid-template-rows: repeat(4, 100px);
-  border-radius: 20px;
   justify-items: center;
   align-items: center;
   transition: all 200ms ease-in-out;
@@ -108,19 +104,10 @@ input {
 
 @media (max-width: 480px) {
   .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 90px);
-    gap: 30px;
-    align-items: none;
+    grid-template-columns: repeat(3, max-content);
   }
   .card {
-    display: grid;
-    border-left: 1px solid white;
     grid-template-rows: repeat(4, 40px);
-    border-radius: 20px;
-    justify-items: center;
-    align-items: center;
-    transition: all 200ms ease-in-out;
   }
   .icon {
     font-size: 25px;
@@ -165,27 +152,6 @@ input {
   }
 }
 
-a {
-  text-decoration: none;
-  color: white;
-  position: absolute;
-  bottom: 100px;
-  animation: bounce 2s infinite ease-in-out;
-}
-
-.scroller {
-  font-size: 2em;
-  border: 1px white solid;
-  border-radius: 50%;
-  padding: 10px;
-  transition: all 400ms;
-  cursor: pointer;
-}
-
-.scroller:hover {
-  border-radius: 25%;
-}
-
 @keyframes bounce {
   0%,
   100% {
@@ -194,12 +160,6 @@ a {
   50% {
     transform: translateY(-20px);
   }
-}
-
-#current-location,
-#forecast,
-#search {
-  position: relative;
 }
 
 #forecast > a {

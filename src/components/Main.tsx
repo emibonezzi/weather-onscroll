@@ -1,7 +1,3 @@
-import {
-  MdKeyboardDoubleArrowLeft,
-  MdKeyboardDoubleArrowRight,
-} from "react-icons/md";
 import { SearchResult } from "../entities/SearchResult";
 import useGeo from "../hooks/useGeo";
 import useNewCityWeather from "../hooks/useNewCityWeather";
@@ -9,7 +5,6 @@ import useSearch from "../hooks/useSearch";
 import useQueryStore from "../state-management/search-query/store";
 import useSelectedCityStore from "../state-management/selected-city/store";
 import DayCard from "./DayCard";
-import { scrollIntoView } from "seamless-scroll-polyfill";
 
 interface Props {
   onSearch: () => void;
@@ -32,7 +27,7 @@ const Main = ({ onSearch }: Props) => {
 
   if (geoLoading || weatherLoading || isLoadingNewWeather)
     return (
-      <div id="current-location" className="grid">
+      <div id="current-location">
         <p>Loading weather data...</p>
       </div>
     );
@@ -44,8 +39,8 @@ const Main = ({ onSearch }: Props) => {
   const countryName = query ? selectedCity.country : geoData?.country_code2;
 
   return (
-    <div id="current-location" className="grid">
-      <div className="grid-child">
+    <>
+      <div id="weather">
         {geoError && <h1>There's been an error in fetching your IP data.</h1>}
         {weatherError && (
           <h1>There's been an error in fetching your location weather data.</h1>
@@ -65,43 +60,26 @@ const Main = ({ onSearch }: Props) => {
           }{" "}
           with a temperature of {forecast!![0].main.temp.toFixed(0)}°F.
         </h1>
-        <a
-          onClick={() => {
-            const element = document.querySelector("#forecast");
-            scrollIntoView(element!!, {
-              behavior: "smooth",
-            });
-          }}
-        >
-          <MdKeyboardDoubleArrowRight className="scroller" />
-        </a>
       </div>
-      <div id="forecast" className="grid-child">
-        <h1>
-          This is how it's going to look in the next five days in {cityName}.
-        </h1>
-        <div className="cards">
-          {forecast?.slice(1).map((day) => (
-            <DayCard
-              dayName={day.dt}
-              weatherMain={day.weather[0].main}
-              weatherIcon={day.weather[0].icon}
-              weatherTemp={day.main.temp}
-            />
-          ))}
+
+      <div id="forecast">
+        <div>
+          <h1>
+            This is how it's going to look in the next five days in {cityName}.
+          </h1>
+          <div className="cards">
+            {forecast?.slice(1).map((day) => (
+              <DayCard
+                dayName={day.dt}
+                weatherMain={day.weather[0].main}
+                weatherIcon={day.weather[0].icon}
+                weatherTemp={day.main.temp}
+              />
+            ))}
+          </div>
         </div>
-        <a
-          onClick={() => {
-            const element = document.querySelector("#search");
-            scrollIntoView(element!!, {
-              behavior: "smooth",
-            });
-          }}
-        >
-          <MdKeyboardDoubleArrowRight className="scroller" />
-        </a>
       </div>
-      <div id="search" className="grid-child">
+      <div id="search">
         <div className="search-container">
           <h1>Want to look elsewhere?</h1>
           <input
@@ -132,18 +110,8 @@ const Main = ({ onSearch }: Props) => {
               ))
             : ""}
         </div>
-        <a
-          onClick={() => {
-            const element = document.querySelector("#forecast");
-            scrollIntoView(element!!, {
-              behavior: "smooth",
-            });
-          }}
-        >
-          <MdKeyboardDoubleArrowLeft className="scroller" />
-        </a>
       </div>
-    </div>
+    </>
   );
 };
 
